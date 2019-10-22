@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage{xifthen}
+\newcommand{\mymacro}{This is the content of my macro!}
+\newcommand{\macrowithArgs}[2]{Apllied to #1 and #2!}
+\newcommand{\macroWithDefault}[2][TheDefault]%
+{The default is #1, the other arg is #2}
+
+\newcommand{\numN}{\mathbb{N}}
+\newcommand{\numR}{\mathbb{R}}
+\newcommand{\numC}{\mathbb{C}}
+\newcommand{\cont}{\mathcal{C}}
+\newcommand{\contOn}[1]{\mathcal{C}(#1)}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\contDef}[1][{}]{\cont(#1)}
+\newcommand{\smartCont}[1][{}]{%
+\cont{}%
+\ifthenelse{ \equal{#1}{} }
+{} %nothing more needed
+{(#1)}
+}
+\newcommand{\cmd}[1]{{\color{blue}\texttt{\textbackslash{}#1}}
+
+\begin{document}
+
+\mymacro{} \mymacro{} \mymacro{} \par
+\macrowithArgs{\mymacro}{42}\par
+\macroWithDefault{\emph{not the default}}\par
+\macroWithDefault[\textbf{overriden by this argument}]%
+{\emph{not the default}}
+
+\begin{enumerate}
+\item Number systems: $\numN, \numR, \numC$
+\item Continuous functions: $\cont{}$
+\item Continuous on domain: $\contOn{\numR^2}, \contOn{[0,1]}$
+\item Vector: $\vect{x}$
+\item Cont. with default: $\contDef$, $\contDef[\numR]$
+\item Smart Continuous: $\smartCont{}, \smartCont{\numC}$
+\item Displaying commands: \cmd{smartCont}
+\end{enumerate}
+
+\end{document}
